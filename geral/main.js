@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var btnCancelarPergunta = document.getElementById("btn-cancelar-pergunta");
   var formAdicionarPergunta = document.getElementById("form-adicionar-pergunta");
   var btnAdicionarWrapper = document.getElementById("btn-adicionar-wrapper");
+  var editingRow = null; // referência à linha que está sendo editada (se houver)
 
   if (btnAdicionarPergunta) {
     btnAdicionarPergunta.addEventListener("click", function () {
@@ -213,6 +214,9 @@ document.addEventListener("DOMContentLoaded", function () {
       // Limpar campos
       document.getElementById("input-pergunta").value = "";
       document.getElementById("checkbox-obrigatorio").checked = false;
+      // cancelar modo edição, se houver
+      editingRow = null;
+      if (btnConfirmarAdicionar) btnConfirmarAdicionar.textContent = "Adicionar";
     });
   }
 
@@ -233,7 +237,32 @@ document.addEventListener("DOMContentLoaded", function () {
       var tbody = document.querySelector(".table-resp tbody");
       if (!tbody) return;
 
-      // Calcular alternância de cor de fundo
+      // Se estivermos editando uma linha existente, atualize-a
+      if (editingRow) {
+        var tdPergunta = editingRow.querySelector('td[data-th="Nome"]');
+        // Limpa o conteúdo e adiciona o novo texto
+        tdPergunta.textContent = perguntaTexto;
+        if (checkboxObrigatorio.checked) {
+          var spanObrigatorio = document.createElement("span");
+          spanObrigatorio.className = "obrigatorio";
+          spanObrigatorio.textContent = " *";
+          tdPergunta.appendChild(spanObrigatorio);
+        }
+
+        // Resetar estado de edição
+        editingRow = null;
+        btnConfirmarAdicionar.textContent = "Adicionar";
+
+        // Fechar formulário e limpar
+        formAdicionarPergunta.style.display = "none";
+        btnAdicionarWrapper.style.display = "block";
+        inputPergunta.value = "";
+        checkboxObrigatorio.checked = false;
+
+        return;
+      }
+
+      // Caso contrário, criar nova linha (modo adicionar)
       var rows = tbody.querySelectorAll("tr");
       var backgroundColor = rows.length % 2 === 0 ? "" : "rgb(248, 248, 248)";
 
@@ -285,6 +314,36 @@ document.addEventListener("DOMContentLoaded", function () {
       checkboxObrigatorio.checked = false;
     });
   }
+
+  // Abrir formulário para edição quando clicarem no ícone de editar na tabela
+  document.addEventListener("click", function (e) {
+    var editIcon = e.target.closest(".action-icon.edit");
+    if (!editIcon) return;
+    e.preventDefault();
+
+    var row = editIcon.closest("tr");
+    if (!row) return;
+
+    var tdPergunta = row.querySelector('td[data-th="Nome"]');
+    if (!tdPergunta) return;
+
+    // Clonar o texto da pergunta sem o span obrigatorio
+    var clone = tdPergunta.cloneNode(true);
+    var spanReq = clone.querySelector(".obrigatorio");
+    if (spanReq) spanReq.remove();
+    var perguntaTexto = clone.textContent.trim();
+
+    // Preencher o formulário
+    document.getElementById("input-pergunta").value = perguntaTexto;
+    var obrig = !!tdPergunta.querySelector(".obrigatorio");
+    document.getElementById("checkbox-obrigatorio").checked = obrig;
+
+    // Entrar em modo edição
+    editingRow = row;
+    formAdicionarPergunta.style.display = "block";
+    btnAdicionarWrapper.style.display = "none";
+    if (btnConfirmarAdicionar) btnConfirmarAdicionar.textContent = "Alterar";
+  });
 
   // Deletar pergunta
   var rowToDelete = null;
