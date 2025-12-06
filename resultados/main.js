@@ -56,11 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 5,
       question: "Você recomendaria este evento para outras pessoas?",
       responses: [
-        { label: "Excelente", value: 90, color: "#66BB33" },
+        { label: "Excelente", value: 1, color: "#66BB33" },
         { label: "Bom", value: 5, color: "#C5C772" },
         { label: "Regular", value: 3, color: "#DFAD40" },
         { label: "Ruim", value: 1, color: "#E66699" },
-        { label: "Péssimo", value: 1, color: "#FF2B34" },
+        { label: "Péssimo", value: 90, color: "#FF2B34" },
       ],
     },
   ];
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Cria o painel
       const painelDiv = document.createElement("div");
-      painelDiv.className = "painel-info-artigos";
+      painelDiv.className = "painel-info-artigos graficos";
 
       painelDiv.innerHTML = `
         <div class="grafico-header">
@@ -156,26 +156,21 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="grafico-content">
           <div class="grafico-barras">
             ${questionData.responses
-              .map(
-                (resp) => `
-              <div class="barra-wrapper">
-                <div class="barra-container">
-                  <div class="barra" style="background-color: ${resp.color}; width: ${resp.value}%"></div>
-                </div>
-                <div class="barra-tooltip">${resp.value}%</div>
-              </div>
-            `
-              )
-              .join("")}
-          </div>
-          <div class="grafico-legenda">
-            ${questionData.responses
               .map((resp) => {
                 const count = Math.round((resp.value / 100) * totalResponses);
+                const countStr = count < 10 ? String(count).padStart(2, "0") : String(count);
                 return `
-              <div class="legenda-item">
-                <span class="legenda-label">${resp.label}</span>
-                <span class="legenda-count">${count}</span>
+              <div class="barra-wrapper">
+                <div class="barra-group">
+                  <div class="barra-container">
+                    <div class="barra" style="background-color: ${resp.color}; width: ${resp.value}%"></div>
+                  </div>
+                  <span class="barra-count">${resp.value}%</span>
+                </div>
+                <div class="legenda-item">
+                  <span class="legenda-label">${resp.label}</span>
+                  <span class="legenda-count">${countStr}</span>
+                </div>
               </div>
             `;
               })
