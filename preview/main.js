@@ -93,22 +93,28 @@ function mostrarToast(mensagem = "Pesquisa respondida!") {
   }, 3000);
 }
 
-function mostrarModal() {
-  if (validarFormulario()) {
-    // Mostrar toast
-    mostrarToast("Pesquisa respondida!");
+function mostrarToastConfirm() {
+  if (!validarFormulario()) return;
 
-    // Ocultar seções do formulário
-    const secaoFormulario = document.getElementById("secao-formulario");
-    const secaoComentario = document.getElementById("secao-comentario");
+  // Mostrar toast de confirmação
+  mostrarToast("Pesquisa respondida!");
 
-    if (secaoFormulario) secaoFormulario.style.display = "none";
-    if (secaoComentario) secaoComentario.style.display = "none";
-  }
+  // Esconder todos os 'cards' de avaliação exceto o primeiro
+  const cards = Array.from(document.querySelectorAll(".container-avaliacao-apresentacao"));
+  cards.forEach(function (el, idx) {
+    if (idx !== 0) el.style.display = "none";
+  });
+
+  // Esconder o botão de envio fora dos cards, se existir
+  const btnOutside = document.querySelector(".button-outside-card");
+  if (btnOutside) btnOutside.style.display = "none";
+
+  // Opcional: rolar para o primeiro card para foco
+  if (cards.length) cards[0].scrollIntoView({ behavior: "smooth" });
 }
 
-function fecharModal() {
-  // Função mantida por compatibilidade
+function fecharToastConfirm() {
+  // Função mantida por compatibilidade (renomeada)
   const secaoFormulario = document.getElementById("secao-formulario");
   const secaoComentario = document.getElementById("secao-comentario");
 

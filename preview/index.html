@@ -51,79 +51,17 @@
     <link rel="stylesheet" type="text/css" href="/geral/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="messages.css" />
 
-    <style media="screen">
-      .button-container {
-        text-align: center;
-      }
-      /* Alinha o botão de envio à direita quando estiver dentro do mesmo
-         container dos cards para ficar alinhado com o conteúdo. */
-      .container-avaliacao-apresentacao .button-container {
-        text-align: right;
-      }
-      /* Classe específica para alinhar o botão com a largura central dos cards */
-      .button-container.align-to-cards {
-        display: flex;
-        justify-content: flex-end;
-        max-width: 720px;
-        margin: 0 auto;
-        padding-right: 0;
-      }
-      /* Classe que engloba apenas o container do botão (sem background nem espaçamento)
-           Use esta classe em vez de estilos inline. */
-      .button-outside-card {
-        background: none !important;
-        padding: 0 !important;
-        margin-right: 0 !important;
-      }
-      .__alert {
-        margin-top: 0 !important;
-      }
-      .__alert:before {
-        height: 100% !important;
-        padding-top: 9px !important;
-      }
-      .__alert .__close {
-        top: 20px !important;
-      }
-      table td,
-      table th {
-        background-color: #fff !important;
-      }
-
-      body.outro .menu-avaliacao {
-        background-color: #333;
-      }
-      body.outro .menu-avaliacao .ds-btn-bordered:hover {
-        color: #333;
-      }
-      body.outro .__button-avaliar {
-        background-color: #145ba8;
-      }
-      body.outro .__button-avaliar:hover {
-        background-color: #114985;
-      }
-      body.outro .footer {
-        background-color: #145ba8 !important;
-      }
-      body.outro .footer .ds-btn-bordered:hover {
-        color: #145ba8;
-      }
-      body.doity .footer .ds-btn-bordered:hover {
-        color: #151515;
-      }
-    </style>
+    <!-- Styles moved to 'preview/avaliar-artigo.css' for maintainability -->
   </head>
 
   <body class="doity admin_preview" data-language="por">
     <!-- :header -->
     <header>
       <div class="menu-avaliacao">
-        <div
-          class="container-avaliacao ds-items-lados-extremos ds-items-vertical-align-middle"
-          style="margin-bottom: 0"
-        >
+        <div class="container-avaliacao ds-items-lados-extremos ds-items-vertical-align-middle">
           <div class="ds-column-half">
-            <h5 style="color: #fff">Evento Teste Frontend</h5>
+            <h5 class="menu-title">Evento Teste Frontend</h5>
+            <img src="/preview/assets/icons/square-arrow.svg" alt="arrow" width="10" />
           </div>
           <div class="ds-column-half ds-items-right">
             <a href="https://doity.com.br/evento-teste-frontend" class="ds-btn-bordered"> Ir para o evento </a>
@@ -132,63 +70,11 @@
       </div>
     </header>
 
-    <div id="ajax-loader" style="display: none">
+    <div id="ajax-loader">
       <div>
         <img src="ajax-loader-center.gif" id="img-ajax-load-center" alt="" /> <span class="ajax-loader-message"></span>
       </div>
     </div>
-    <style type="text/css">
-      #ajax-loader {
-        background-color: #111;
-        bottom: 0;
-        left: 0;
-        position: fixed;
-        right: 0;
-        top: 0;
-        z-index: 1060;
-        background: rgba(0, 0, 0, 0.1);
-      }
-      #ajax-loader div {
-        display: block;
-        height: 10%;
-        left: 50%;
-        margin: -150px 0 0 -280px;
-        outline: medium none;
-        position: fixed;
-        top: 60%;
-        width: 560px;
-        z-index: 2050;
-      }
-
-      #ajax-loader span.ajax-loader-message {
-        display: none;
-        position: fixed;
-        background: #fcf8e3;
-        padding: 20px;
-        border-radius: 5px;
-        margin: 0 auto;
-        top: 50%;
-        margin-top: -20px;
-        font-size: 12px;
-        color: #8a6d3b;
-        border: 1px solid #faebcc;
-      }
-
-      #img-ajax-load-center {
-        background-color: #000000;
-        border-radius: 6px;
-        padding: 8px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -24px;
-        margin-top: -24px;
-
-        opacity: 0.75;
-        -moz-opacity: 0.75;
-        filter: alpha(opacity=75);
-      }
-    </style>
 
     <div class="dados-avaliacao">
       <div class="container-avaliacao-apresentacao" id="container-title">
@@ -212,9 +98,6 @@
       <div class="container-avaliacao-apresentacao">
         <div class="dados-avaliar">
           <!-- Formulário -->
-
-          <h1 style="margin-top: 50px" id="texto-form">Pesquisa de Satisfação</h1>
-
           <div class="formulario-dados">
             <div class="row">
               <span id="pergunta-descricao">1 - Como você avaliaria sua experiência geral no evento?</span>
@@ -697,19 +580,17 @@
       </div>
       <!-- .container-avaliacao-apresentacao -->
       <div class="container-avaliacao-apresentacao">
-        <div class="row">
-          <div class="texarea">
-            <label for="PesquisaAvaliacaoComentario">Deixe o seu comentário</label
-            ><textarea
-              name="data[PesquisaAvaliacao][comentario]"
-              rows="3"
-              class="form-control"
-              required="required"
-              cols="30"
-              id="PesquisaAvaliacaoComentario"
-            ></textarea>
-          </div>
-          <br />
+        <div class="textarea">
+          <label for="PesquisaAvaliacaoComentario">Deixe o seu comentário</label>
+          <textarea
+            name="data[PesquisaAvaliacao][comentario]"
+            rows="5"
+            class="form-control"
+            required="required"
+            cols="30"
+            id="PesquisaAvaliacaoComentario"
+          ></textarea>
+          <p id="comentario-validacao" style="display: none"></p>
         </div>
       </div>
 
@@ -724,29 +605,28 @@
     </div>
     <!-- .dados-avaliacao -->
 
-    <!-- Botão de envio fora dos cards (alinhado com a largura dos cards) -->
     <div class="container-avaliacao-apresentacao button-outside-card">
       <div class="button-container align-to-cards">
-        <button class="__button-avaliar" type="submit">Enviar</button>
+        <button class="__button-avaliar" type="button" onclick="mostrarToastConfirm(); return false;">Enviar</button>
       </div>
     </div>
 
     <!-- :footer -->
-    <div class="footer" style="padding-left: 20px; padding-right: 20px">
-      <div class="container-avaliacao ds-items-lados-extremos ds-items-vertical-align-middle" style="margin-bottom: 0">
-        <div class="ds-column-half">
-          <div class="ds-flex-row ds-items-vertical-align-middle">
-            <a href="http://doity.com.br/" target="_blank"><img src="logo-negative.png" width="72px" alt="" /></a>
-            <span style="margin-left: 10px; color: #fff; font-size: 10px; text-transform: uppercase"
-              >Plataforma de Eventos</span
-            >
-          </div>
-        </div>
-
-        <div class="ds-column-half">
-          <a href="https://doity.com.br/" class="ds-btn-bordered">Crie um evento gratuitamente</a>
-        </div>
+    <div class="footer">
+      <div id="footer">
+        <p></p>
+        <p>Desenvolvido por <a href="http://doity.com.br/" target="_blank">Doity Plataforma de Eventos</a></p>
+        <p>- 2025 - Todos os direitos reservados -</p>
+        <p>
+          <a href="https://ajuda.doity.com.br/" target="_blank">Central de Ajuda</a> -
+          <a href="#">Entre em Contato</a>
+        </p>
+        <p></p>
       </div>
     </div>
+
+    <!-- Tooltip and modal scripts -->
+    <script src="tooltip.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
