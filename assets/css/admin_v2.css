@@ -4982,7 +4982,6 @@ table:not(.dataTable) {
   background-color: #ff2b34;
 }
 
-/* Make the percentage text use the same color as the nivel badge */
 .grafico-porcentagem.excelente {
   color: #66bb33;
 }
@@ -4998,9 +4997,31 @@ table:not(.dataTable) {
 .grafico-porcentagem.pessimo {
   color: #ff2b34;
 }
+
 .grafico-content {
   display: flex;
-  gap: 10px; /* espaço entre barras e legenda (lado direito) */
+  gap: 10px;
+}
+
+.barra {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.barra.excelente {
+  background-color: #66bb33;
+}
+.barra.bom {
+  background-color: #c5c772;
+}
+.barra.regular {
+  background-color: #dfad40;
+}
+.barra.ruim {
+  background-color: #e66699;
+}
+.barra.pessimo {
+  background-color: #ff2b34;
 }
 
 .grafico-barras {
@@ -5079,7 +5100,6 @@ table:not(.dataTable) {
   font-size: 14px;
 }
 
-/* --- OVERRIDE: Legenda label alignment --- */
 .grafico-legenda .legenda-item {
   display: flex;
   align-items: center;
@@ -5124,5 +5144,4 @@ table:not(.dataTable) {
   position: relative;
   z-index: 1000;
   border-radius: 4px;
-  box-shadow: 0 0 0 3px rgba(255, 43, 52, 0.14);
 }
