@@ -1,0 +1,123 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.dados,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  overflow: hidden;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+.left {
+  float: left;
+}
+
+.right {
+  float: left;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  padding-bottom: 19px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 980px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main dados message and sign up button */
+.dados {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #eee;
+  border-radius: 6px;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+/* Supporting dados content */
+.dados {
+  margin: 30px 0;
+}
+.dados p + h4 {
+  margin-top: 28px;
+}
+
+.questions {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px 4px 0 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  position: relative;
+  padding: 5px 15px 15px;
+  margin: 40px 0;
+}
+
+label {
+  display: block;
+}
+
+input[type=radio] {
+  margin-left: 0 !important;
+}
+
+.error textarea {
+  border: 1px solid #F84D4A;
+}
+
+.error .error-message {
+  font-size: 12px;
+  color: #a94442;
+}
+h4 span {
+  font-weight: bold;
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .dados,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
