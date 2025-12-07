@@ -73,6 +73,12 @@ document.addEventListener("DOMContentLoaded", function () {
   var btnEnviarPesquisa = document.getElementById("btn-enviar-pesquisa");
   if (btnEnviarPesquisa) {
     btnEnviarPesquisa.addEventListener("click", function (e) {
+      // Ignore clicks if the button was previously disabled
+      if (this.classList && this.classList.contains("link_desabilitado")) {
+        e.preventDefault();
+        return;
+      }
+
       e.preventDefault();
 
       // Criar overlay

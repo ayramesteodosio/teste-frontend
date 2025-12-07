@@ -234,7 +234,7 @@ table th {
 .dados-avaliacao {
   background-color: #eeeeee;
   color: #000000;
-  padding: 1.875em;
+  padding: 25px 25px 0 25px;
 }
 
 .dados-avaliacao .dados-artigo .titulo-artigo {
@@ -715,6 +715,18 @@ p[id^="item-validacao-"] {
     background: none !important;
     padding: 0 !important;
     border-radius: 0 !important;
+  }
+}
+
+/* Center star-rating on mobile */
+@media (max-width: 768px) {
+  .star-rating {
+    text-align: center !important;
+  }
+  .rating {
+    display: inline-block !important;
+    margin: 0 auto !important;
+    float: none !important;
   }
 }
 

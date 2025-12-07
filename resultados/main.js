@@ -1,79 +1,74 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Dados da pesquisa (isso viria do backend/API)
   const surveyData = {
     date: "01/12/2025",
     sendTo: "Todos confirmados",
     responses: 120,
   };
 
-  // Dados mockados das perguntas com respostas
   const questionsData = [
     {
       id: 1,
       question: "Como você avaliaria sua experiência geral no evento?",
       responses: [
-        { label: "Excelente", value: 85, color: "#66BB33" },
-        { label: "Bom", value: 10, color: "#C5C772" },
-        { label: "Regular", value: 3, color: "#DFAD40" },
-        { label: "Ruim", value: 1, color: "#E66699" },
-        { label: "Péssimo", value: 1, color: "#FF2B34" },
+        { label: "Excelente", value: 85 },
+        { label: "Bom", value: 10 },
+        { label: "Regular", value: 3 },
+        { label: "Ruim", value: 1 },
+        { label: "Péssimo", value: 1 },
       ],
     },
     {
       id: 2,
       question: "O conteúdo apresentado foi relevante para você?",
       responses: [
-        { label: "Excelente", value: 45, color: "#66BB33" },
-        { label: "Bom", value: 72, color: "#C5C772" },
-        { label: "Regular", value: 15, color: "#DFAD40" },
-        { label: "Ruim", value: 8, color: "#E66699" },
-        { label: "Péssimo", value: 5, color: "#FF2B34" },
+        { label: "Excelente", value: 45 },
+        { label: "Bom", value: 72 },
+        { label: "Regular", value: 15 },
+        { label: "Ruim", value: 8 },
+        { label: "Péssimo", value: 5 },
       ],
     },
     {
       id: 3,
       question: "A qualidade dos palestrantes foi satisfatória?",
       responses: [
-        { label: "Excelente", value: 30, color: "#66BB33" },
-        { label: "Bom", value: 25, color: "#C5C772" },
-        { label: "Regular", value: 20, color: "#DFAD40" },
-        { label: "Ruim", value: 45, color: "#E66699" },
-        { label: "Péssimo", value: 15, color: "#FF2B34" },
+        { label: "Excelente", value: 30 },
+        { label: "Bom", value: 25 },
+        { label: "Regular", value: 45 },
+        { label: "Ruim", value: 20 },
+        { label: "Péssimo", value: 15 },
       ],
     },
     {
       id: 4,
       question: "Como você avalia a organização do evento?",
       responses: [
-        { label: "Excelente", value: 10, color: "#66BB33" },
-        { label: "Bom", value: 15, color: "#C5C772" },
-        { label: "Regular", value: 20, color: "#DFAD40" },
-        { label: "Ruim", value: 30, color: "#E66699" },
-        { label: "Péssimo", value: 25, color: "#FF2B34" },
+        { label: "Excelente", value: 10 },
+        { label: "Bom", value: 15 },
+        { label: "Regular", value: 20 },
+        { label: "Ruim", value: 30 },
+        { label: "Péssimo", value: 25 },
       ],
     },
     {
       id: 5,
       question: "Você recomendaria este evento para outras pessoas?",
       responses: [
-        { label: "Excelente", value: 1, color: "#66BB33" },
-        { label: "Bom", value: 5, color: "#C5C772" },
-        { label: "Regular", value: 3, color: "#DFAD40" },
-        { label: "Ruim", value: 1, color: "#E66699" },
-        { label: "Péssimo", value: 90, color: "#FF2B34" },
+        { label: "Excelente", value: 1 },
+        { label: "Bom", value: 5 },
+        { label: "Regular", value: 3 },
+        { label: "Ruim", value: 1 },
+        { label: "Péssimo", value: 90 },
       ],
     },
   ];
 
-  // Função para criar os itens do painel
   function createPanelItems(data) {
     const panelDetails = document.querySelector(".painel-info-details");
     if (!panelDetails) return;
 
-    // Limpa o conteúdo existente
     panelDetails.innerHTML = "";
 
-    // Cria item de Data
     const dateItem = document.createElement("div");
     dateItem.className = "info-item";
     dateItem.innerHTML = `
@@ -82,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     panelDetails.appendChild(dateItem);
 
-    // Cria item de Enviar para
     const sendToItem = document.createElement("div");
     sendToItem.className = "info-item";
     sendToItem.innerHTML = `
@@ -91,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     panelDetails.appendChild(sendToItem);
 
-    // Cria item de Respostas
     const responsesItem = document.createElement("div");
     responsesItem.className = "info-item";
     responsesItem.innerHTML = `
@@ -100,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function () {
     panelDetails.appendChild(responsesItem);
   }
 
-  // Função para determinar o nível baseado na porcentagem
   function getNivel(percentage) {
     if (percentage >= 80) return "excelente";
     if (percentage >= 60) return "bom";
@@ -109,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return "pessimo";
   }
 
-  // Função para obter o label do nível
   function getNivelLabel(nivel) {
     const labels = {
       excelente: "Excelente",
@@ -121,24 +112,38 @@ document.addEventListener("DOMContentLoaded", function () {
     return labels[nivel];
   }
 
-  // Função para renderizar os gráficos dinamicamente
   function renderGraphs() {
     const graficosContainer = document.getElementById("graficos_pesquisa");
     if (!graficosContainer) return;
 
-    // Limpa o container
     graficosContainer.innerHTML = "";
 
     questionsData.forEach((questionData, index) => {
-      // Calcula a resposta predominante
-      const maxResponse = questionData.responses.reduce((max, resp) => (resp.value > max.value ? resp : max));
-      const nivel = getNivel(maxResponse.value);
-      const nivelLabel = getNivelLabel(nivel);
-
-      // Calcula o total de respostas
       const totalResponses = questionData.responses.reduce((sum, resp) => sum + resp.value, 0);
 
-      // Cria o painel
+      const labelToNivel = {
+        Excelente: "excelente",
+        Bom: "bom",
+        Regular: "regular",
+        Ruim: "ruim",
+        Péssimo: "pessimo",
+      };
+
+      const responsesWithPercent = questionData.responses.map((resp) => {
+        const percent = totalResponses > 0 ? Math.round((resp.value / totalResponses) * 100) : 0;
+        const respNivel = labelToNivel[resp.label] || getNivel(percent);
+        return { ...resp, percent, respNivel };
+      });
+
+      const maxResp = responsesWithPercent.reduce(
+        (max, r) => (r.percent > max.percent ? r : max),
+        responsesWithPercent[0] || { percent: 0 }
+      );
+      const maxPercent = maxResp ? maxResp.percent : 0;
+      const maxLabel = maxResp ? maxResp.label : null;
+      const nivel = maxLabel && labelToNivel[maxLabel] ? labelToNivel[maxLabel] : getNivel(maxPercent);
+      const nivelLabel = getNivelLabel(nivel);
+
       const painelDiv = document.createElement("div");
       painelDiv.className = "painel-info-artigos graficos";
 
@@ -149,23 +154,22 @@ document.addEventListener("DOMContentLoaded", function () {
             <h2 class="grafico-titulo">${questionData.question}</h2>
           </div>
           <div class="grafico-header-right">
-            <span class="grafico-porcentagem ${nivel}">${maxResponse.value}%</span>
+            <span class="grafico-porcentagem ${nivel}">${maxPercent}%</span>
             <span class="grafico-nivel ${nivel}">${nivelLabel}</span>
           </div>
         </div>
         <div class="grafico-content">
           <div class="grafico-barras">
-            ${questionData.responses
+            ${responsesWithPercent
               .map((resp) => {
-                const count = Math.round((resp.value / 100) * totalResponses);
-                const countStr = count < 10 ? String(count).padStart(2, "0") : String(count);
+                const countStr = String(resp.value);
                 return `
               <div class="barra-wrapper">
                 <div class="barra-group">
                   <div class="barra-container">
-                    <div class="barra" style="background-color: ${resp.color}; width: ${resp.value}%"></div>
+                    <div class="barra ${resp.respNivel}" style="width: ${resp.percent}%"></div>
                   </div>
-                  <span class="barra-count">${resp.value}%</span>
+                  <span class="barra-count">${resp.percent}%</span>
                 </div>
                 <div class="legenda-item">
                   <span class="legenda-label">${resp.label}</span>
@@ -183,7 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Dados mockados dos comentários
   const commentsData = [
     { comment: "Evento muito bom, organização excelente!", participant: "João Silva" },
     { comment: "Gostei bastante do conteúdo apresentado.", participant: "Maria Santos" },
@@ -203,10 +206,23 @@ document.addEventListener("DOMContentLoaded", function () {
   function renderComments(page = 1) {
     const tbody = document.querySelector(".table-resp tbody");
     const totalComments = document.getElementById("total-comentarios");
+    const emptyDiv = document.querySelector(".comentarios-empty");
+    const tableWrapper = document.querySelector(".comentarios-participantes-pesquisa .table-wrapper");
+    const paginationContainer = document.querySelector(".comentarios-participantes-pesquisa .pagination");
 
     if (!tbody) return;
 
     totalComments.textContent = `(${commentsData.length})`;
+
+    if (!commentsData || commentsData.length === 0) {
+      if (emptyDiv) emptyDiv.style.display = "block";
+      if (tableWrapper) tableWrapper.style.display = "none";
+      if (paginationContainer) paginationContainer.style.display = "none";
+      return;
+    } else {
+      if (emptyDiv) emptyDiv.style.display = "none";
+      if (tableWrapper) tableWrapper.style.display = "block";
+    }
 
     const startIndex = (page - 1) * commentsPerPage;
     const endIndex = startIndex + commentsPerPage;
@@ -214,11 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     tbody.innerHTML = "";
 
-    pageComments.forEach((item, index) => {
+    pageComments.forEach((item, idx) => {
       const row = document.createElement("tr");
-      if (index % 2 !== 0) {
-        row.style.backgroundColor = "rgb(248, 248, 248)";
-      }
       row.innerHTML = `
         <td data-th="Comentário">${item.comment}</td>
         <td data-th="Participante" style="text-align: left">${item.participant}</td>
@@ -250,6 +263,8 @@ document.addEventListener("DOMContentLoaded", function () {
       prevLink.href = "#";
       prevLink.className = "prev";
       prevLink.title = "Anterior";
+      prevLink.setAttribute("aria-label", "Anterior");
+      prevLink.innerHTML = '<img src="new_admin-select_dropdown.svg" class="paging-arrow" alt="Anterior"/>';
       prevLink.addEventListener("click", (e) => {
         e.preventDefault();
         renderComments(currentPage - 1);
@@ -339,6 +354,8 @@ document.addEventListener("DOMContentLoaded", function () {
       nextLink.href = "#";
       nextLink.className = "next";
       nextLink.title = "Próxima";
+      nextLink.setAttribute("aria-label", "Próxima");
+      nextLink.innerHTML = '<img src="new_admin-select_dropdown.svg" class="paging-arrow" alt="Próxima"/>';
       nextLink.addEventListener("click", (e) => {
         e.preventDefault();
         renderComments(currentPage + 1);
@@ -347,12 +364,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Inicializa o painel
   createPanelItems(surveyData);
 
-  // Renderiza os gráficos
   renderGraphs();
 
-  // Renderiza comentários
   renderComments(1);
 });

@@ -11,31 +11,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Resultado da pesquisa de satisfação - Doity</title>
 
-    <link rel="stylesheet" type="text/css" href="reset.css" />
-    <link rel="stylesheet" type="text/css" href="960.css" />
-    <link rel="stylesheet" type="text/css" href="jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="thickbox.css" />
-    <link rel="stylesheet" type="text/css" href="doitystrap.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/960.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/thickbox.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/doitystrap.css" />
     <link rel="stylesheet" type="text/css" href="/geral/admin.css" />
     <link rel="stylesheet" type="text/css" href="/geral/admin_text.css" />
-    <link rel="stylesheet" type="text/css" href="gray.css" />
-    <link rel="stylesheet" type="text/css" href="datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="form.css" />
-    <link rel="stylesheet" type="text/css" href="menu.css" />
-    <link rel="stylesheet" type="text/css" href="messages.css" />
-    <link rel="stylesheet" type="text/css" href="statics.css" />
-    <link rel="stylesheet" type="text/css" href="tabs.css" />
-    <link rel="stylesheet" type="text/css" href="wysiwyg.css" />
-    <link rel="stylesheet" type="text/css" href="wysiwyg.modal.css" />
-    <link rel="stylesheet" type="text/css" href="wysiwyg-editor.css" />
-    <link rel="stylesheet" type="text/css" href="jquery.thumbs.css" />
-    <link rel="stylesheet" type="text/css" href="bootstrap-tooltip.css" />
-    <link rel="stylesheet" type="text/css" href="jquery.sidr.light.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/gray.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/form.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/menu.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/messages.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/statics.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/wysiwyg.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/wysiwyg.modal.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/wysiwyg-editor.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/jquery.thumbs.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/bootstrap-tooltip.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/jquery.sidr.light.css" />
     <link rel="stylesheet" type="text/css" href="/geral/admin_v2.css" />
-    <link rel="stylesheet" type="text/css" href="admin_responsive.css" />
-    <link rel="stylesheet" type="text/css" href="font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="croppie.css" />
-
+    <link rel="stylesheet" type="text/css" href="/geral/admin_responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/geral/croppie.css" />
     <link rel="shortcut icon" href="favicon.png" />
     <link
       rel="apple-touch-icon"
@@ -1137,48 +1136,48 @@
                       Resultado da pesquisa de satisfação
                     </h3>
                     <div class="painel-header-wrapper">
-                      <div class="painel-info-details">
-                        <div class="info-item">
-                          <span class="label">Data:</span>
-                          <span class="value">01/12/2025</span>
-                        </div>
-                        <div class="info-item">
-                          <span class="label">Enviar pesquisa para:</span>
-                          <span class="value">Todos confirmados</span>
-                        </div>
-                        <div class="info-item">
-                          <span class="value" style="font-size: 14px">1 resposta</span>
-                        </div>
+                      <div class="painel-info-details painel-resultados">
+                        <!-- gerado no JS -->
                       </div>
 
                       <div class="painel-actions">
-                        <a class="__btn-secondary" href="https://doity.com.br/admin/pesquisas_resultados/resultado_excel/1402">Baixar resultados</a>
+                        <a
+                          class="__btn-secondary"
+                          href="https://doity.com.br/admin/pesquisas_resultados/resultado_excel/1402"
+                          >Baixar resultados</a
+                        >
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div id="graficos_pesquisa">
-                </div>
+                <div id="graficos_pesquisa"></div>
               </div>
 
               <div class="box comentarios_pesquisa">
-                  <p class="mostra-comentarios"></p>
-                    Comentários dos participantes <span id="total-comentarios"></span>
-                  </p>
-                  <div class="comentarios-participantes-pesquisa">
-                    <table class="table-resp">
-                      <tbody>
-                        <tr>
-                          <td data-th="Comentário">1 - Tudo ok!</td>
-                          <td data-th="Participante" style="text-align: left">João Silva</td>
+                <p class="titulo-comentarios">Comentários <span id="total-comentarios"></span></p>
+                <div class="comentarios-participantes-pesquisa">
+                  <div class="table-wrapper" style="margin-bottom: 30px">
+                    <table class="table-resp" aria-describedby="total-comentarios">
+                      <thead>
+                        <tr class="table-header">
+                          <th scope="col">Comentário</th>
+                          <th scope="col">Participante</th>
                         </tr>
+                      </thead>
+                      <tbody>
+                        <!-- Comentários serão inseridos aqui pelo main.js -->
                       </tbody>
                     </table>
-                    <div class="pagination" style="display: none">
-                      <div class="paging"></div>
-                    </div>
                   </div>
+                  <div class="pagination" style="display: none">
+                    <div class="paging"></div>
+                  </div>
+                  <div class="comentarios-empty" style="display: none; text-align: center; padding: 20px 0">
+                    <img src="../assets/icons/sad-icon.svg" alt="Sem comentários" class="comentarios-empty-icon" />
+                    <p class="comentarios-empty-text">A pesquisa ainda não possui comentários.</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="footer">
