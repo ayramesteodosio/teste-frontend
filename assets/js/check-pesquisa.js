@@ -184,9 +184,13 @@
         }
 
         var descricaoVal = readDescricaoValue(desc);
-        if (!stripHtml(descricaoVal)) {
+        var descricaoLimpa = stripHtml(descricaoVal);
+        if (!descricaoLimpa) {
           showErrorAfter(desc, "Não foi preenchido");
           errors.push("Não foi preenchido");
+        } else if (descricaoLimpa.length < 10) {
+          showErrorAfter(desc, "A descrição deve ter pelo menos 10 caracteres.");
+          errors.push("Descrição muito curta");
         }
 
         var dataInicio = document.getElementById("PesquisaDataDisponivel");
