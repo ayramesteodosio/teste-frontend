@@ -4,8 +4,23 @@ Este repositório contém o desafio técnico para a vaga de Front-end na Doity.
 
 ## Instalação
 
+Você pode clonar este repositório ou baixar como arquivo zip:
+
+- **Clonar via Git:**
+
+  ```bash
+  git clone https://github.com/ayramesteodosio/teste-frontend.git
+  ```
+
+- **Baixar como ZIP:**
+
+  1. Clique em `Code` > `Download ZIP`
+  2. Extraia o arquivo em seu computador
+  3. Abrir o editor de código e rodar o projeto
+
 - Não há dependências obrigatórias para rodar localmente — são arquivos HTML/CSS/JS estáticos.
 - Recomendo servir os arquivos por um servidor HTTP simples (evita problemas com CORS e caminhos relativos).
+- Para
 
 Opções rápidas (recomendado: Live Server):
 
@@ -70,7 +85,7 @@ python3 -m http.server 8000
 npx serve . -l 8000
 ```
 
-Dica: para abrir diretamente a área de criação use `http://localhost:8000/pages/criar-pesquisa/index.html` (ou ajuste a porta conforme seu servidor).
+Dica: para abrir diretamente a área de criação use `http://localhost:5500/pages/criar-pesquisa/index.html` (ou ajuste a porta conforme seu servidor).
 
 Páginas relevantes:
 
