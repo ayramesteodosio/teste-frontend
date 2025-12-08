@@ -4030,10 +4030,10 @@ input#CampoPersonalizadoObrigatorio {
 }
 #osx-container #osx-modal-content > img {
   display: block;
-  margin: 0 auto 20px; /* 20px gap after icon */
+  margin: 0 auto 20px;
 }
 #osx-container #osx-modal-data p {
-  margin: 0 0 20px 0; /* 20px gap after text */
+  margin: 0 0 40px 0;
   color: #4a4a4a !important;
   text-shadow: none !important;
 }

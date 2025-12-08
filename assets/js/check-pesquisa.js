@@ -32,6 +32,116 @@
     if (form) {
       var nome = document.getElementById("PesquisaNome");
       var desc = document.getElementById("PesquisaDescricao");
+
+      function removeFieldErrorFor(el) {
+        try {
+          if (!el) return;
+          var container = el && el.closest && el.closest(".input");
+          if (!container) container = el && el.parentNode;
+          if (container) {
+            var err = container.querySelector && container.querySelector(".field-error");
+            if (err) err.remove();
+            return;
+          }
+        } catch (e) {}
+        try {
+          var anyErr = document.querySelector(".field-error");
+          if (anyErr) anyErr.remove();
+        } catch (e) {}
+      }
+
+      try {
+        if (nome && nome.addEventListener) {
+          nome.addEventListener("input", function () {
+            removeFieldErrorFor(nome);
+          });
+        }
+
+        if (desc) {
+          try {
+            if (window.CKEDITOR) {
+              var inst = window.CKEDITOR.instances && window.CKEDITOR.instances.PesquisaDescricao;
+              if (inst && typeof inst.on === "function") {
+                inst.on("change", function () {
+                  removeFieldErrorFor(desc);
+                });
+              }
+            }
+          } catch (e) {}
+          try {
+            if (desc.addEventListener) {
+              desc.addEventListener("input", function () {
+                removeFieldErrorFor(desc);
+              });
+            }
+          } catch (e) {}
+        }
+
+        try {
+          var dataInicioEl = document.getElementById("PesquisaDataDisponivel");
+          var dataFimEl = document.getElementById("PesquisaDataTermino");
+          var bindDateHandler = function (el) {
+            if (!el) return;
+            var handler = function () {
+              removeFieldErrorFor(el);
+            };
+            try {
+              if (el.addEventListener) {
+                el.addEventListener("change", handler);
+                el.addEventListener("input", handler);
+                el.addEventListener("blur", handler);
+              }
+            } catch (e) {}
+            try {
+              if (window.jQuery && typeof window.jQuery === "function") {
+                try {
+                  window.jQuery(el).on("change input", handler);
+                } catch (e) {}
+              }
+            } catch (e) {}
+          };
+
+          bindDateHandler(dataInicioEl);
+          bindDateHandler(dataFimEl);
+        } catch (e) {}
+
+        // If jQuery UI datepicker is used, wrap its onSelect to ensure a 'change' event is triggered
+        try {
+          if (window.jQuery && window.jQuery.fn && typeof window.jQuery.fn.datepicker === "function") {
+            try {
+              [dataInicioEl, dataFimEl].forEach(function (el) {
+                if (!el) return;
+                try {
+                  var $el = window.jQuery(el);
+                  var orig = $el.datepicker("option", "onSelect");
+                  var wrapper = function (sel) {
+                    try {
+                      if (typeof orig === "function") orig.call(this, sel);
+                    } catch (ee) {}
+                    try {
+                      window.jQuery(this).trigger("change");
+                    } catch (eee) {}
+                  };
+                  $el.datepicker("option", "onSelect", wrapper);
+                } catch (e) {}
+              });
+            } catch (e) {}
+          }
+        } catch (e) {}
+
+        try {
+          var enviarRadios = document.querySelectorAll('input[name="data[Pesquisa][enviar_para]"]');
+          if (enviarRadios && enviarRadios.length) {
+            enviarRadios.forEach(function (r) {
+              r.addEventListener("change", function () {
+                var fieldset = document.querySelector(".opcoes_enviar_para") || form;
+                removeFieldErrorFor(fieldset);
+              });
+            });
+          }
+        } catch (e) {}
+      } catch (e) {}
+
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -153,7 +263,7 @@
             cleanup();
           } catch (e) {}
           try {
-            location.href = "/geral/index.html?" + redirectParam;
+            location.href = "/pages/geral/index.html?" + redirectParam;
           } catch (e) {}
         };
 
@@ -164,7 +274,7 @@
             cleanup();
           } catch (e) {}
           try {
-            location.href = "/geral/index.html?" + redirectParam;
+            location.href = "/pages/geral/index.html?" + redirectParam;
           } catch (e) {}
         }, 5000);
 
@@ -187,7 +297,7 @@
                 try {
                   cleanup();
                 } catch (e) {}
-                location.href = "/geral/index.html?" + redirectParam;
+                location.href = "/pages/geral/index.html?" + redirectParam;
               })
               .catch(function () {
                 if (redirected) return;
@@ -196,14 +306,14 @@
                 try {
                   cleanup();
                 } catch (e) {}
-                location.href = "/geral/index.html?" + redirectParam;
+                location.href = "/pages/geral/index.html?" + redirectParam;
               });
           } catch (e) {
             clearTimeout(fallbackTimer);
             try {
               cleanup();
             } catch (ee) {}
-            location.href = "/geral/index.html";
+            location.href = "/pages/geral/index.html";
           }
           return;
         }
