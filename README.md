@@ -106,7 +106,7 @@ Posso abrir diretamente? (file://)
 
 ## Vídeo explicativo
 
-- Vídeo: (Pendente)
+- Vídeo: https://youtu.be/hk6NiAiRmto
 
 ## Observações e dicas
 
