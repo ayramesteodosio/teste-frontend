@@ -87,7 +87,7 @@ Posso abrir diretamente? (file://)
   - Alguns datepickers/plugins e bibliotecas esperam carregar recursos via HTTP e funcionam melhor quando servidos.
   - Caminhos relativos e rotas que dependem de `location.pathname` podem não corresponder exatamente.
 
-- Por isso recomendo usar Live Server / `npx live-server` / `python3 -m http.server` para garantir comportamento idêntico ao ambiente de produção.
+- Por isso recomendo usar Live Server / `npx live-server` / `python3 -m http.server` para garantir comportamento mais próximo ao ambiente de produção.
 
 ## Vídeo explicativo
 
