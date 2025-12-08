@@ -1,10 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const surveyData = {
-    date: "01/12/2025",
-    sendTo: "Todos confirmados",
-    responses: 120,
-  };
-
   const questionsData = [
     {
       id: 1,
@@ -62,6 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
     },
   ];
+
+  const maxResponses = Math.max(...questionsData.map((q) => q.responses.reduce((sum, r) => sum + r.value, 0)));
+
+  const surveyData = {
+    date: "01/12/2025",
+    sendTo: "Todos confirmados",
+    responses: maxResponses,
+  };
 
   function createPanelItems(data) {
     const panelDetails = document.querySelector(".painel-info-details");
@@ -264,7 +266,8 @@ document.addEventListener("DOMContentLoaded", function () {
       prevLink.className = "prev";
       prevLink.title = "Anterior";
       prevLink.setAttribute("aria-label", "Anterior");
-      prevLink.innerHTML = '<img src="/assets/icons/new_admin-select_dropdown.svg" class="paging-arrow" alt="Anterior"/>';
+      prevLink.innerHTML =
+        '<img src="/assets/icons/new_admin-select_dropdown.svg" class="paging-arrow" alt="Anterior"/>';
       prevLink.addEventListener("click", (e) => {
         e.preventDefault();
         renderComments(currentPage - 1);
@@ -355,7 +358,8 @@ document.addEventListener("DOMContentLoaded", function () {
       nextLink.className = "next";
       nextLink.title = "Próxima";
       nextLink.setAttribute("aria-label", "Próxima");
-      nextLink.innerHTML = '<img src="/assets/icons/new_admin-select_dropdown.svg" class="paging-arrow" alt="Próxima"/>';
+      nextLink.innerHTML =
+        '<img src="/assets/icons/new_admin-select_dropdown.svg" class="paging-arrow" alt="Próxima"/>';
       nextLink.addEventListener("click", (e) => {
         e.preventDefault();
         renderComments(currentPage + 1);
