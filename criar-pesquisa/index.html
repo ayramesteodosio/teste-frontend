@@ -44,6 +44,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="robots" content="noindex" />
 
+    <!-- jQuery + jQuery UI (for datepicker) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+
     <!-- Google Tag Manager -->
 
     <!-- End Google Tag Manager -->
@@ -932,7 +936,7 @@
               >
                 <div id="modal_premium_content" class="modal_mobile d_display-flex d_gap-10 d_padding-20">
                   <div id="modal_premium_image" class="d_border_radius-10" style="background-color: #ffbebe">
-                    <img src="selo-pro.gif" alt="" style="max-height: 370px" />
+                    <img src="/assets/images/selo-pro.gif" alt="" style="max-height: 370px" />
                   </div>
                   <div
                     id="modal_premium_text"
@@ -1146,17 +1150,17 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   ></path></svg
-                ><a href="/geral/index.html">Pesquisa de Satisfação</a>
+                >Pesquisa de Satisfação
               </p>
               <span style="display: flex; flex-direction: column; justify-content: center; width: fit-content"
-                >Editar Pesquisa de Satisfação</span
+                >Criar Pesquisa de Satisfação</span
               >
             </div>
 
             <div style="width: 100%; max-width: 1366px; margin: 20px auto 0 auto">
               <div class="pesquisa box">
                 <form
-                  action="https://doity.com.br/admin/pesquisas/edit/1402"
+                  action="https://doity.com.br/admin/pesquisas/add"
                   novalidate="novalidate"
                   id="PesquisaAdminEditForm"
                   method="post"
@@ -1175,12 +1179,11 @@
                   </div>
 
                   <div class="content forms config_pesquisa">
-                    <input type="hidden" name="data[Pesquisa][id]" value="1402" id="PesquisaId" />
                     <div class="input text required form-input gap-20">
                       <label for="PesquisaNome" class="label-medium">Nome<span>*</span></label>
                       <input
                         name="data[Pesquisa][nome]"
-                        value="Pesquisa de Qualidade do Evento"
+                        value=""
                         maxlength="255"
                         type="text"
                         id="PesquisaNome"
@@ -1195,9 +1198,7 @@
                         cols="30"
                         rows="6"
                         id="PesquisaDescricao"
-                      >
-                        Queremos saber como foi a sua experi&amp;ecirc;ncia neste evento. Suas respostas nos ajudar&amp;atilde;o a melhorar continuamente a organiza&amp;ccedil;&amp;atilde;o, o conte&amp;uacute;do e a qualidade dos pr&amp;oacute;ximos encontros. Obrigado por dedicar alguns minutos para contribuir com seu feedback!
-                      </textarea>
+                      ></textarea>
                     </div>
                     <div class="input form-input required period">
                       <label class="label-medium">Período</label>
@@ -1206,10 +1207,9 @@
                           <input
                             class="period-input datepicker"
                             name="data[Pesquisa][data_disponivel]"
-                            value="01/11/2025"
+                            value=""
                             type="text"
                             id="PesquisaDataDisponivel"
-                            required="required"
                             placeholder="Data de início"
                             aria-label="Data de início"
                             autocomplete="off"
@@ -1219,10 +1219,9 @@
                           <input
                             class="period-input datepicker"
                             name="data[Pesquisa][data_termino]"
-                            value="31/12/2025"
+                            value=""
                             type="text"
                             id="PesquisaDataTermino"
-                            required="required"
                             placeholder="Data de término"
                             aria-label="Data de término"
                             autocomplete="off"
@@ -1235,7 +1234,6 @@
                       <input
                         type="checkbox"
                         name="data[Pesquisa][ativo]"
-                        checked="checked"
                         value="1"
                         id="PesquisaAtivo"
                         style="margin-right: 0"
@@ -1265,10 +1263,7 @@
                       </fieldset>
                     </div>
                   </div>
-                  <div class="row buttons">
-                    <div class="__btn-secondary">
-                      <a href="/geral/index.html" style="text-decoration: none">Cancelar</a>
-                    </div>
+                  <div class="row buttons create">
                     <div style="display: none">
                       <input
                         type="hidden"
@@ -1277,7 +1272,7 @@
                         id="TokenFields218289597"
                       /><input type="hidden" name="data[_Token][unlocked]" value="" id="TokenUnlocked757847620" />
                     </div>
-                    <div class="submit"><input type="submit" value="Salvar" /></div>
+                    <div class="submit"><button type="submit" class="btn-submit">Cadastrar</button></div>
                   </div>
                 </form>
               </div>
@@ -1344,11 +1339,7 @@
         </div>
       </div>
     </div>
-    <!-- jQuery + jQuery UI for datepicker -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
     <script src="/assets/js/pesquisa-datepicker.js"></script>
-    <script src="/assets/js/pesquisa.js"></script>
     <script src="/assets/js/check-pesquisa.js"></script>
   </body>
 </html>

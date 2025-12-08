@@ -1,12 +1,14 @@
 function validarFormulario() {
-  // Verificar se todas as perguntas foram respondidas
-  const perguntas = [11638, 11639, 11640, 11641, 11650];
+  const rows = document.querySelectorAll(".formulario-dados .row");
   let todasRespondidas = true;
 
-  perguntas.forEach(function (pergunta, index) {
-    const radios = document.getElementsByName("data[pergunta][" + pergunta + "][nota]");
-    let respondida = false;
+  rows.forEach(function (row, index) {
+    const perguntaEl = row.querySelector("#pergunta-descricao");
+    const texto = perguntaEl ? perguntaEl.textContent || "" : "";
+    const obrigatoria = texto.indexOf("*") !== -1;
 
+    const radios = row.querySelectorAll('input[type="radio"]');
+    let respondida = false;
     for (let i = 0; i < radios.length; i++) {
       if (radios[i].checked) {
         respondida = true;
@@ -15,15 +17,15 @@ function validarFormulario() {
     }
 
     const msgValidacao = document.getElementById("item-validacao-" + (index + 1));
-    if (!respondida) {
-      todasRespondidas = false;
-      if (msgValidacao) {
-        msgValidacao.style.display = "block";
+    if (obrigatoria) {
+      if (!respondida) {
+        todasRespondidas = false;
+        if (msgValidacao) msgValidacao.style.display = "block";
+      } else {
+        if (msgValidacao) msgValidacao.style.display = "none";
       }
     } else {
-      if (msgValidacao) {
-        msgValidacao.style.display = "none";
-      }
+      if (msgValidacao) msgValidacao.style.display = "none";
     }
   });
 
@@ -48,9 +50,7 @@ function validarFormulario() {
       comentario.focus();
       return false;
     } else {
-      if (comentarioValidacao) {
-        comentarioValidacao.style.display = "none";
-      }
+      if (comentarioValidacao) comentarioValidacao.style.display = "none";
     }
   }
 
@@ -58,7 +58,6 @@ function validarFormulario() {
 }
 
 function mostrarToast(mensagem = "Pesquisa respondida!") {
-  // Criar container se não existir
   let container = document.getElementById("toast-container");
   if (!container) {
     container = document.createElement("div");
@@ -67,14 +66,13 @@ function mostrarToast(mensagem = "Pesquisa respondida!") {
     document.body.appendChild(container);
   }
 
-  // Criar toast
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.innerHTML = `
     <button class="toast-close-btn" onclick="this.parentElement.classList.add('hiding'); setTimeout(() => this.parentElement.remove(), 300)">
-      <img src="assets/icons/messageClose.svg" alt="Fechar" />
+      <img src="/assets/icons/messageClose.svg" alt="Fechar" />
     </button>
-    <img src="assets/icons/FlashMes-success.svg" alt="Sucesso" class="toast-icon" />
+    <img src="/assets/icons/FlashMes-success.svg" alt="Sucesso" class="toast-icon" />
     <div class="toast-content">
       <p class="toast-message">${mensagem}</p>
     </div>
@@ -82,13 +80,12 @@ function mostrarToast(mensagem = "Pesquisa respondida!") {
 
   container.appendChild(toast);
 
-  // Remover toast após 3 segundos
   setTimeout(() => {
     if (toast.parentElement) {
       toast.classList.add("hiding");
       setTimeout(() => {
         toast.remove();
-      }, 300); // Tempo da animação
+      }, 300);
     }
   }, 3000);
 }
@@ -96,25 +93,20 @@ function mostrarToast(mensagem = "Pesquisa respondida!") {
 function mostrarToastConfirm() {
   if (!validarFormulario()) return;
 
-  // Mostrar toast de confirmação
   mostrarToast("Pesquisa respondida!");
 
-  // Esconder todos os 'cards' de avaliação exceto o primeiro
   const cards = Array.from(document.querySelectorAll(".container-avaliacao-apresentacao"));
   cards.forEach(function (el, idx) {
     if (idx !== 0) el.style.display = "none";
   });
 
-  // Esconder o botão de envio fora dos cards, se existir
   const btnOutside = document.querySelector(".button-outside-card");
   if (btnOutside) btnOutside.style.display = "none";
 
-  // Opcional: rolar para o primeiro card para foco
   if (cards.length) cards[0].scrollIntoView({ behavior: "smooth" });
 }
 
 function fecharToastConfirm() {
-  // Função mantida por compatibilidade (renomeada)
   const secaoFormulario = document.getElementById("secao-formulario");
   const secaoComentario = document.getElementById("secao-comentario");
 
@@ -122,25 +114,21 @@ function fecharToastConfirm() {
   if (secaoComentario) secaoComentario.style.display = "none";
 }
 
-// Adicionar listeners para ocultar mensagens de erro ao preencher
 document.addEventListener("DOMContentLoaded", function () {
-  // Listeners para as estrelas (perguntas)
-  const perguntas = [11638, 11639, 11640, 11641, 11650];
-
-  perguntas.forEach(function (pergunta, index) {
-    const radios = document.getElementsByName("data[pergunta][" + pergunta + "][nota]");
+  const rows = document.querySelectorAll(".formulario-dados .row");
+  rows.forEach(function (row, index) {
+    const radios = row.querySelectorAll('input[type="radio"]');
     const msgValidacao = document.getElementById("item-validacao-" + (index + 1));
-
     for (let i = 0; i < radios.length; i++) {
       radios[i].addEventListener("change", function () {
-        if (msgValidacao) {
-          msgValidacao.style.display = "none";
-        }
+        const perguntaEl = row.querySelector("#pergunta-descricao");
+        const texto = perguntaEl ? perguntaEl.textContent || "" : "";
+        const obrigatoria = texto.indexOf("*") !== -1;
+        if (obrigatoria && msgValidacao) msgValidacao.style.display = "none";
       });
     }
   });
 
-  // Listener para o comentário
   const comentario = document.getElementById("PesquisaAvaliacaoComentario");
   const comentarioValidacao = document.getElementById("comentario-validacao");
 

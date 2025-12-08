@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
       var title = this.getAttribute("title") || this.getAttribute("data-original-title");
       if (!title) return;
 
-      // Criar tooltip
       tooltip = document.createElement("div");
       tooltip.className = "tooltip bottom in";
       tooltip.innerHTML = '<div class="tooltip-arrow"></div><div class="tooltip-inner">' + title + "</div>";
@@ -69,11 +68,9 @@ document.addEventListener("DOMContentLoaded", function () {
     statusElement.innerHTML = '<span class="status-badge ' + badgeClass + '">' + badgeText + "</span>";
   }
 
-  // Abrir modal ao clicar em "Enviar pesquisa"
   var btnEnviarPesquisa = document.getElementById("btn-enviar-pesquisa");
   if (btnEnviarPesquisa) {
     btnEnviarPesquisa.addEventListener("click", function (e) {
-      // Ignore clicks if the button was previously disabled
       if (this.classList && this.classList.contains("link_desabilitado")) {
         e.preventDefault();
         return;
@@ -81,19 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
       e.preventDefault();
 
-      // Criar overlay
       var overlay = document.createElement("div");
       overlay.id = "simplemodal-overlay";
       overlay.style.cssText =
         "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;";
       document.body.appendChild(overlay);
 
-      // Criar wrapper centralizado
       var wrapper = document.createElement("div");
       wrapper.id = "simplemodal-wrapper";
       wrapper.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001;";
 
-      // Criar container do modal
       var modalContainer = document.createElement("div");
       modalContainer.id = "osx-container";
       modalContainer.style.display = "block";
@@ -104,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
         var clonedContent = modalContent.cloneNode(true);
         clonedContent.style.display = "block";
 
-        // Garantir que o conteúdo interno também fique visível
         var modalData = clonedContent.querySelector("#osx-modal-data");
         if (modalData) {
           modalData.style.display = "block";
@@ -115,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(wrapper);
       }
 
-      // Fechar ao clicar no overlay
       overlay.addEventListener("click", function () {
         overlay.remove();
         wrapper.remove();
@@ -123,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Fechar modal ao clicar em Cancelar
   document.addEventListener("click", function (e) {
     if (e.target && e.target.id === "apenas-liberar") {
       e.preventDefault();
@@ -133,34 +124,28 @@ document.addEventListener("DOMContentLoaded", function () {
       if (wrapper) wrapper.remove();
     }
 
-    // Simular envio da pesquisa
     if (e.target && e.target.id === "liberar-e-enviar") {
       e.preventDefault();
 
-      // Fechar modal
       var overlay = document.getElementById("simplemodal-overlay");
       var wrapper = document.getElementById("simplemodal-wrapper");
       if (overlay) overlay.remove();
       if (wrapper) wrapper.remove();
 
-      // Desabilitar botão de enviar pesquisa
       var btnEnviarPesquisa = document.getElementById("btn-enviar-pesquisa");
       if (btnEnviarPesquisa) {
         btnEnviarPesquisa.classList.add("link_desabilitado");
         btnEnviarPesquisa.removeAttribute("href");
         btnEnviarPesquisa.style.cursor = "not-allowed";
 
-        // Criar wrapper para tooltip
         var wrapperDiv = document.createElement("div");
         wrapperDiv.style.display = "inline-block";
         wrapperDiv.setAttribute("data-toggle", "tooltip");
         wrapperDiv.setAttribute("data-original-title", "Pesquisa já enviada");
 
-        // Substituir botão por wrapper
         btnEnviarPesquisa.parentNode.insertBefore(wrapperDiv, btnEnviarPesquisa);
         wrapperDiv.appendChild(btnEnviarPesquisa);
 
-        // Adicionar tooltip ao wrapper
         var tooltip = null;
         wrapperDiv.addEventListener("mouseenter", function (event) {
           var title = this.getAttribute("data-original-title");
@@ -199,34 +184,133 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Controle do formulário de adicionar pergunta
   var btnAdicionarPergunta = document.getElementById("btn-adicionar-pergunta");
   var btnCancelarPergunta = document.getElementById("btn-cancelar-pergunta");
   var formAdicionarPergunta = document.getElementById("form-adicionar-pergunta");
   var btnAdicionarWrapper = document.getElementById("btn-adicionar-wrapper");
-  var editingRow = null; // referência à linha que está sendo editada (se houver)
+  var editingRow = null;
+
+  function showInputError(inputEl, message) {
+    try {
+      var existing =
+        inputEl &&
+        inputEl.parentNode &&
+        inputEl.parentNode.querySelector &&
+        inputEl.parentNode.querySelector(".field-error");
+      if (existing && existing.parentElement) existing.parentElement.removeChild(existing);
+    } catch (e) {}
+
+    try {
+      var node = document.createElement("div");
+      node.className = "field-error";
+      node.style.color = "#c00";
+      node.style.fontSize = "12px";
+      node.style.marginTop = "6px";
+      node.textContent = message || "";
+      var container =
+        (inputEl && inputEl.closest && inputEl.closest(".input")) || (inputEl && inputEl.parentNode) || document.body;
+      if (container && container.appendChild) container.appendChild(node);
+      else document.body.appendChild(node);
+      try {
+        inputEl.focus();
+      } catch (e) {}
+    } catch (e) {}
+  }
 
   if (btnAdicionarPergunta) {
     btnAdicionarPergunta.addEventListener("click", function () {
+      try {
+        var iprev = document.getElementById("input-pergunta");
+        if (iprev) {
+          var prevErr =
+            iprev.parentNode && iprev.parentNode.querySelector && iprev.parentNode.querySelector(".field-error");
+          if (prevErr && prevErr.parentElement) prevErr.parentElement.removeChild(prevErr);
+        }
+      } catch (e) {}
+
       btnAdicionarWrapper.style.display = "none";
       formAdicionarPergunta.style.display = "block";
     });
   }
 
+  try {
+    var inputPerguntaEl = document.getElementById("input-pergunta");
+    if (inputPerguntaEl) {
+      inputPerguntaEl.addEventListener("input", function () {
+        try {
+          var err = this.parentNode && this.parentNode.querySelector && this.parentNode.querySelector(".field-error");
+          if (err && err.parentElement) err.parentElement.removeChild(err);
+        } catch (e) {}
+      });
+    }
+  } catch (e) {}
+
+  function showBottomBar(mensagem) {
+    try {
+      if (typeof mostrarToastLocal === "function") {
+        mostrarToastLocal(mensagem || "Sucesso");
+        return;
+      }
+
+      try {
+        var container = document.getElementById("toast-container");
+        if (!container) {
+          container = document.createElement("div");
+          container.id = "toast-container";
+          container.className = "toast-container";
+          document.body.appendChild(container);
+        }
+
+        var toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML =
+          '\n      <button class="toast-close-btn" onclick="this.parentElement.classList.add(\'hiding\'); setTimeout(() => this.parentElement.remove(), 300)">\n        <img src="/assets/icons/messageClose.svg" alt="Fechar" />\n      </button>\n      <img src="/assets/icons/FlashMes-success.svg" alt="Sucesso" class="toast-icon" />\n      <div class="toast-content">\n        <p class="toast-message">' +
+          (mensagem || "Sucesso") +
+          "</p>\n      </div>\n    ";
+
+        container.appendChild(toast);
+
+        setTimeout(function () {
+          if (toast.parentElement) {
+            toast.classList.add("hiding");
+            setTimeout(function () {
+              toast.remove();
+            }, 300);
+          }
+        }, 3000);
+      } catch (e) {}
+    } catch (e) {}
+  }
+
+  try {
+    var paramsOnLoad = new URLSearchParams(location.search);
+    var pc = paramsOnLoad.get("perguntaCriada");
+    var pe = paramsOnLoad.get("perguntaEditada");
+    if (pc || pe) {
+      var msg = pc ? "Pergunta criada com sucesso!" : "Pergunta editada com sucesso!";
+      try {
+        showBottomBar(msg);
+      } catch (e) {}
+      paramsOnLoad.delete("perguntaCriada");
+      paramsOnLoad.delete("perguntaEditada");
+      var newUrl = location.pathname + (paramsOnLoad.toString() ? "?" + paramsOnLoad.toString() : "") + location.hash;
+      try {
+        history.replaceState(null, "", newUrl);
+      } catch (e) {}
+    }
+  } catch (e) {}
+
   if (btnCancelarPergunta) {
     btnCancelarPergunta.addEventListener("click", function () {
       formAdicionarPergunta.style.display = "none";
       btnAdicionarWrapper.style.display = "block";
-      // Limpar campos
       document.getElementById("input-pergunta").value = "";
       document.getElementById("checkbox-obrigatorio").checked = false;
-      // cancelar modo edição, se houver
       editingRow = null;
       if (btnConfirmarAdicionar) btnConfirmarAdicionar.textContent = "Adicionar";
     });
   }
 
-  // Adicionar pergunta à lista
   var btnConfirmarAdicionar = document.getElementById("btn-confirmar-adicionar");
   if (btnConfirmarAdicionar) {
     btnConfirmarAdicionar.addEventListener("click", function () {
@@ -235,18 +319,15 @@ document.addEventListener("DOMContentLoaded", function () {
       var perguntaTexto = inputPergunta.value.trim();
 
       if (!perguntaTexto) {
-        alert("Por favor, digite uma pergunta.");
+        showInputError(inputPergunta, "Por favor, digite uma pergunta.");
         return;
       }
 
-      // Obter tbody da tabela
       var tbody = document.querySelector(".table-resp tbody");
       if (!tbody) return;
 
-      // Se estivermos editando uma linha existente, atualize-a
       if (editingRow) {
         var tdPergunta = editingRow.querySelector('td[data-th="Nome"]');
-        // Limpa o conteúdo e adiciona o novo texto
         tdPergunta.textContent = perguntaTexto;
         if (checkboxObrigatorio.checked) {
           var spanObrigatorio = document.createElement("span");
@@ -255,35 +336,33 @@ document.addEventListener("DOMContentLoaded", function () {
           tdPergunta.appendChild(spanObrigatorio);
         }
 
-        // Resetar estado de edição
         editingRow = null;
         btnConfirmarAdicionar.textContent = "Adicionar";
 
-        // Fechar formulário e limpar
         formAdicionarPergunta.style.display = "none";
         btnAdicionarWrapper.style.display = "block";
         inputPergunta.value = "";
         checkboxObrigatorio.checked = false;
 
+        try {
+          showBottomBar("Pergunta editada com sucesso!");
+        } catch (e) {}
+
         return;
       }
 
-      // Caso contrário, criar nova linha (modo adicionar)
       var rows = tbody.querySelectorAll("tr");
       var backgroundColor = rows.length % 2 === 0 ? "" : "rgb(248, 248, 248)";
 
-      // Criar nova linha
       var novaLinha = document.createElement("tr");
       if (backgroundColor) {
         novaLinha.style.backgroundColor = backgroundColor;
       }
 
-      // Criar célula da pergunta
       var tdPergunta = document.createElement("td");
       tdPergunta.setAttribute("data-th", "Nome");
       tdPergunta.textContent = perguntaTexto;
 
-      // Adicionar asterisco se obrigatória
       if (checkboxObrigatorio.checked) {
         var spanObrigatorio = document.createElement("span");
         spanObrigatorio.className = "obrigatorio";
@@ -291,7 +370,6 @@ document.addEventListener("DOMContentLoaded", function () {
         tdPergunta.appendChild(spanObrigatorio);
       }
 
-      // Criar célula de ações
       var tdAcoes = document.createElement("td");
       tdAcoes.setAttribute("data-th", "Ações");
       tdAcoes.style.textAlign = "center";
@@ -299,29 +377,27 @@ document.addEventListener("DOMContentLoaded", function () {
         '<a href="#" style="margin-right: 5px"><div class="action-icon edit"></div></a>' +
         '<a href="#" class="red"><div class="action-icon delete"></div></a>';
 
-      // Adicionar células à linha
       novaLinha.appendChild(tdPergunta);
       novaLinha.appendChild(tdAcoes);
 
-      // Adicionar linha à tabela
       tbody.appendChild(novaLinha);
 
-      // Atualizar contador
       var countSpan = document.getElementById("total-perguntas");
       if (countSpan) {
         var newCount = tbody.querySelectorAll("tr").length;
         countSpan.textContent = "(" + newCount + ")";
       }
 
-      // Resetar formulário
       formAdicionarPergunta.style.display = "none";
       btnAdicionarWrapper.style.display = "block";
       inputPergunta.value = "";
       checkboxObrigatorio.checked = false;
+      try {
+        showBottomBar("Pergunta criada com sucesso!");
+      } catch (e) {}
     });
   }
 
-  // Abrir formulário para edição quando clicarem no ícone de editar na tabela
   document.addEventListener("click", function (e) {
     var editIcon = e.target.closest(".action-icon.edit");
     if (!editIcon) return;
@@ -333,51 +409,42 @@ document.addEventListener("DOMContentLoaded", function () {
     var tdPergunta = row.querySelector('td[data-th="Nome"]');
     if (!tdPergunta) return;
 
-    // Clonar o texto da pergunta sem o span obrigatorio
     var clone = tdPergunta.cloneNode(true);
     var spanReq = clone.querySelector(".obrigatorio");
     if (spanReq) spanReq.remove();
     var perguntaTexto = clone.textContent.trim();
 
-    // Preencher o formulário
     document.getElementById("input-pergunta").value = perguntaTexto;
     var obrig = !!tdPergunta.querySelector(".obrigatorio");
     document.getElementById("checkbox-obrigatorio").checked = obrig;
 
-    // Entrar em modo edição
     editingRow = row;
     formAdicionarPergunta.style.display = "block";
     btnAdicionarWrapper.style.display = "none";
     if (btnConfirmarAdicionar) btnConfirmarAdicionar.textContent = "Alterar";
   });
 
-  // Deletar pergunta
   var rowToDelete = null;
 
   document.addEventListener("click", function (e) {
-    // Verificar se clicou no ícone de deletar ou no link pai
     var deleteIcon = e.target.closest(".action-icon.delete");
     if (deleteIcon) {
       e.preventDefault();
 
-      // Encontrar a linha (tr) mais próxima
       rowToDelete = deleteIcon.closest("tr");
 
       if (rowToDelete) {
-        // Criar overlay
         var overlay = document.createElement("div");
         overlay.id = "simplemodal-overlay-delete";
         overlay.style.cssText =
           "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000;";
         document.body.appendChild(overlay);
 
-        // Criar wrapper centralizado
         var wrapper = document.createElement("div");
         wrapper.id = "simplemodal-wrapper-delete";
         wrapper.style.cssText =
           "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001;";
 
-        // Criar container do modal
         var modalContainer = document.createElement("div");
         modalContainer.id = "osx-container";
         modalContainer.style.display = "block";
@@ -388,7 +455,6 @@ document.addEventListener("DOMContentLoaded", function () {
           var clonedContent = modalContent.cloneNode(true);
           clonedContent.style.display = "block";
 
-          // Garantir que o conteúdo interno também fique visível
           var modalData = clonedContent.querySelector("#osx-modal-data");
           if (modalData) {
             modalData.style.display = "block";
@@ -399,7 +465,6 @@ document.addEventListener("DOMContentLoaded", function () {
           document.body.appendChild(wrapper);
         }
 
-        // Fechar ao clicar no overlay
         overlay.addEventListener("click", function () {
           overlay.remove();
           wrapper.remove();
@@ -408,7 +473,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Cancelar delete
     if (e.target && e.target.id === "btn-cancelar-delete") {
       e.preventDefault();
       var overlay = document.getElementById("simplemodal-overlay-delete");
@@ -418,7 +482,6 @@ document.addEventListener("DOMContentLoaded", function () {
       rowToDelete = null;
     }
 
-    // Confirmar delete
     if (e.target && e.target.id === "btn-confirmar-delete") {
       e.preventDefault();
 
@@ -426,20 +489,17 @@ document.addEventListener("DOMContentLoaded", function () {
         var tbody = rowToDelete.parentElement;
         rowToDelete.remove();
 
-        // Atualizar cores alternadas
         var rows = tbody.querySelectorAll("tr");
         rows.forEach(function (tr, index) {
           tr.style.backgroundColor = index % 2 === 0 ? "" : "rgb(248, 248, 248)";
         });
 
-        // Atualizar contador
         var countSpan = document.getElementById("total-perguntas");
         if (countSpan) {
           countSpan.textContent = "(" + rows.length + ")";
         }
       }
 
-      // Fechar modal
       var overlay = document.getElementById("simplemodal-overlay-delete");
       var wrapper = document.getElementById("simplemodal-wrapper-delete");
       if (overlay) overlay.remove();

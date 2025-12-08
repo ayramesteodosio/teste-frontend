@@ -1,63 +1,84 @@
-
 .box .mensagem {
-	padding :0;
+  padding: 0;
 }
 
 .form-evento .mensagem {
-    margin: 0 20px;
-    margin-top: 20px;
+  margin: 0 20px;
+  margin-top: 20px;
 }
 
 #flashMessage,
 #bannerMessage,
 .mensagem > div,
-#cadastro_eventoMessage, div[id$='Message'],
-#excluidoMessage, div[id$='Message'],
-#enviarMessage, div[id$='Message'],
-#emailMessage, div[id$='Message'],
-#exportarMessage, div[id$='Message'],
-#editadoMessage, div[id$='Message'],
-#saldoMessage, div[id$='Message'] {
-	font-weight: bold;
-    font-size: 12px;
-    max-width: 100%;
-    padding: 17px 62px !important;
-    border-radius: 5px;
-    position: relative;
-	margin-bottom: 5px;
-	-webkit-animation: fadeIn 1s linear;
-	        animation: fadeIn 1s linear;
+#cadastro_eventoMessage,
+div[id$="Message"],
+#excluidoMessage,
+div[id$="Message"],
+#enviarMessage,
+div[id$="Message"],
+#emailMessage,
+div[id$="Message"],
+#exportarMessage,
+div[id$="Message"],
+#editadoMessage,
+div[id$="Message"],
+#saldoMessage,
+div[id$="Message"] {
+  font-weight: bold;
+  font-size: 12px;
+  max-width: 100%;
+  padding: 17px 62px !important;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 5px;
+  -webkit-animation: fadeIn 1s linear;
+  animation: fadeIn 1s linear;
 }
 @-webkit-keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* //////// ICONE A ESQUERDA \\\\\\\\ */
 #flashMessage:before,
 #bannerMessage:before,
 .mensagem > div:before,
-#cadastro_eventoMessage:before, div[id$='Message']:before,
-#enviarMessage:before, div[id$='Message']:before,
-#emailMessage:before, div[id$='Message']:before,
-#exportarMessage:before, div[id$='Message']:before,
-#editadoMessage:before, div[id$='Message']:before,
-#saldoMessage:before, div[id$='Message']:before,
-#excluidoMessage:before, div[id$='Message']:before {
-    content: '';
-    font-family: 'FontAwesome';
-    font-size: 19px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 24px;
-    margin: auto;
-    width: 24px;
-    height: 18px;
+#cadastro_eventoMessage:before,
+div[id$="Message"]:before,
+#enviarMessage:before,
+div[id$="Message"]:before,
+#emailMessage:before,
+div[id$="Message"]:before,
+#exportarMessage:before,
+div[id$="Message"]:before,
+#editadoMessage:before,
+div[id$="Message"]:before,
+#saldoMessage:before,
+div[id$="Message"]:before,
+#excluidoMessage:before,
+div[id$="Message"]:before {
+  content: "";
+  font-family: "FontAwesome";
+  font-size: 19px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 24px;
+  margin: auto;
+  width: 24px;
+  height: 18px;
 }
 #flashMessage.success:before,
 #bannerMessage.success:before,
@@ -68,22 +89,30 @@
 #exportarMessage.success:before,
 #editadoMessage.success:before,
 #excluidoMessage.success:before,
-#saldoMessage.success:before  {
-    content: '\f058';
+#saldoMessage.success:before {
+  content: "\f058";
 }
 
 #flashMessage.error:before,
 #bannerMessage.error:before,
 .mensagem > div.error:before,
-#cadastro_eventoMessage.error:before, div[id$='Message'].error:before,
-#enviarMessage.error:before, div[id$='Message'].error:before,
-#emailMessage.error:before, div[id$='Message'].error:before,
-#emailMessage.error:before, div[id$='Message'].error:before,
-#exportarMessage.error:before, div[id$='Message'].error:before,
-#editadoMessage.error:before, div[id$='Message'].error:before,
-#excluidoMessage.error:before, div[id$='Message'].error:before,
-#saldoMessage.error:before, div[id$='Message'].error:before  {
-    content: '\f071';
+#cadastro_eventoMessage.error:before,
+div[id$="Message"].error:before,
+#enviarMessage.error:before,
+div[id$="Message"].error:before,
+#emailMessage.error:before,
+div[id$="Message"].error:before,
+#emailMessage.error:before,
+div[id$="Message"].error:before,
+#exportarMessage.error:before,
+div[id$="Message"].error:before,
+#editadoMessage.error:before,
+div[id$="Message"].error:before,
+#excluidoMessage.error:before,
+div[id$="Message"].error:before,
+#saldoMessage.error:before,
+div[id$="Message"].error:before {
+  content: "\f071";
 }
 
 #flashMessage.orange:before,
@@ -104,9 +133,9 @@
 #emailMessage.orange:before,
 #exportarMessage.orange:before,
 #editadoMessage.orange:before,
-#saldoMessage.orange:before  {
-    content: '\f071';
-    color: #FFA826;
+#saldoMessage.orange:before {
+  content: "\f071";
+  color: #ffa826;
 }
 
 #flashMessage.blue:before,
@@ -127,44 +156,51 @@
 #emailMessage.blue:before,
 #exportarMessage.blue:before,
 #editadoMessage.blue:before,
-#saldoMessage.blue:before  {
-    content: '\f05a';
+#saldoMessage.blue:before {
+  content: "\f05a";
 }
 
 /* //////// BARRA APÓS O ICONE \\\\\\\\ */
 
 .extensions-themes #flashMessage {
-    margin: 0 0 10px;
+  margin: 0 0 10px;
 }
 
 .box .mensagem img {
-	position: absolute;
-	top: 7px;
-	right: 7px;
-	cursor: pointer;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  cursor: pointer;
 }
 
 #authMessage,
 #flashMessage.error,
 #bannerMessage.error,
 .mensagem > div.error,
-#cadastro_eventoMessage.error, div[id$='Message'].error,
-#excluidoMessage.error, div[id$='Message'].error,
-#enviarMessage.error, div[id$='Message'].error,
-#emailMessage.error, div[id$='Message'].error,
-#exportarMessage.error, div[id$='Message'].error,
-#editadoMessage.error, div[id$='Message'].error,
-#saldoMessage.error, div[id$='Message'].error {
-	display: block;
-	background-color: #FDEDED;
-	border: 1px solid #FF2B34;
-	color: #FF2B34;
-    padding: 15px;
-    margin-bottom: 12px;
-    border-radius: 5px;
-    font-family: Inter;
-    font-size: 12px;
-    font-weight: 400;
+#cadastro_eventoMessage.error,
+div[id$="Message"].error,
+#excluidoMessage.error,
+div[id$="Message"].error,
+#enviarMessage.error,
+div[id$="Message"].error,
+#emailMessage.error,
+div[id$="Message"].error,
+#exportarMessage.error,
+div[id$="Message"].error,
+#editadoMessage.error,
+div[id$="Message"].error,
+#saldoMessage.error,
+div[id$="Message"].error {
+  display: block;
+  background-color: #fdeded;
+  border: 1px solid #ff2b34;
+  color: #ff2b34;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 #flashMessage.success,
@@ -177,14 +213,14 @@
 #exportarMessage.success,
 #editadoMessage.success,
 #saldoMessage.success {
-	display: block;
-	background-color: #EAFFDE;
-	border: 1px solid #6B3;
-	color: #6B3;
-    border-radius: 5px;
-    font-size: 12px;
-    font-family: Inter;
-    font-weight: normal;
+  display: block;
+  background-color: #eaffde;
+  border: 1px solid #6b3;
+  color: #6b3;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: normal;
 }
 
 #flashMessage.blue,
@@ -206,10 +242,10 @@
 #exportarMessage.info,
 #editadoMessage.info,
 #saldoMessage.info {
-	display: block;
-	background-color: #f1f6fc;
-	border: 1px solid #136bc5;
-	color: #136bc5;
+  display: block;
+  background-color: #f1f6fc;
+  border: 1px solid #136bc5;
+  color: #136bc5;
 }
 
 #flashMessage.orange,
@@ -231,41 +267,89 @@
 #exportarMessage.warning,
 #editadoMessage.warning,
 #saldoMessage.warning {
-	display: block;
-	background-color: #FFFBD2;
-	border: 1px solid #FFE926;
-	color: #CA851D;
-    border-radius: 5px;
-    font-weight: normal;
+  display: block;
+  background-color: #fffbd2;
+  border: 1px solid #ffe926;
+  color: #ca851d;
+  border-radius: 5px;
+  font-weight: normal;
 }
 
 .error-message {
-    color: #FF2B34 !important;
-    clear: both !important;
-    display: block !important;
-    margin-top: 5px;
+  color: #ff2b34 !important;
+  clear: both !important;
+  display: block !important;
+  margin-top: 5px;
 }
 
 .flash-close:after {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    right: 20px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    font-family: 'FontAwesome';
-    font-size: 20px;
-    content: '';
-    background-image: url("messageClose.svg");
-    background-position: center;
-    cursor: pointer;
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  font-family: "FontAwesome";
+  font-size: 20px;
+  content: "";
+  background-image: url("messageClose.svg");
+  background-position: center;
+  cursor: pointer;
 }
 
 .error .flash-close:after {
-    filter: invert(174%) sepia(94%) saturate(6078%) hue-rotate(342deg) brightness(95%) contrast(146%);
+  filter: invert(174%) sepia(94%) saturate(6078%) hue-rotate(342deg) brightness(95%) contrast(146%);
 }
 
-.warning .flash-close:after, .orange .flash-close:after {
-    filter: invert(48%) sepia(18%) saturate(5454%) hue-rotate(339deg) brightness(131%) contrast(103%);
+.bottom-bar-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #f0fff4;
+  border: 1px solid #d6f0dc;
+  color: #074b2e;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  margin: 12px 0;
+}
+
+.bottom-bar-toast.container-aligned {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bottom-bar-toast svg {
+  flex: 0 0 auto;
+}
+
+.warning .flash-close:after,
+.orange .flash-close:after {
+  filter: invert(48%) sepia(18%) saturate(5454%) hue-rotate(339deg) brightness(131%) contrast(103%);
+}
+
+/* Top bar used on editar-pesquisa (shows above the title) */
+.top-bar-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: #f0fff4;
+  border: 1px solid #d6f0dc;
+  color: #074b2e;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  margin: 0 0 12px 0;
+}
+
+.top-bar-toast.container-aligned {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }

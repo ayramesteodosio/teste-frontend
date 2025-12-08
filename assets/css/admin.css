@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Inter";
-  src: url("Inter-VariableFont_slnt,wght.ttf") format("truetype"),
-    url("Inter-VariableFont_slnt,wght.ttf") format("truetype");
+  src: url("/assets/fonts/Inter-VariableFont_slnt\,wght.ttf") format("truetype"),
+    url("/assets/fonts/Inter-VariableFont_slnt,wght.ttf") format("truetype");
 }
 html,
 body {
@@ -265,6 +265,7 @@ img {
 .box.big,
 .box .big {
   width: 700px;
+  padding: 0 !important
 }
 .box.medium,
 .box .medium {
@@ -396,6 +397,28 @@ img {
   background: #ff2b34 !important;
   border: none !important;
   color: #fff !important;
+}
+
+.label-medium {
+  display: inline-block;
+  font-weight: 500 !important;
+  font-style: normal !important;
+  font-size: 12px !important;
+  color: #414651 !important;
+  padding-bottom: 6px !important;
+}
+
+.label-medium span {
+  color: #ff2b34 !important;
+}
+
+.config_pesquisa {
+  gap: 25px !important;
+}
+
+.form-input {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
 }
 
 .btn-220:hover.red {
@@ -3975,6 +3998,111 @@ input#CampoPersonalizadoObrigatorio {
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+#simplemodal-wrapper {
+  z-index: 1000;
+}
+#osx-container {
+  width: 600px;
+  height: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 35px;
+  overflow: hidden;
+}
+#osx-container #osx-modal-content,
+#osx-container #osx-modal-data {
+  display: block !important;
+}
+
+#osx-container #osx-modal-title {
+  color: #151515 !important;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 0 20px 0;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+#osx-container #osx-modal-content {
+  text-align: center;
+}
+#osx-container #osx-modal-content > img {
+  display: block;
+  margin: 0 auto 20px; /* 20px gap after icon */
+}
+#osx-container #osx-modal-data p {
+  margin: 0 0 20px 0; /* 20px gap after text */
+  color: #4a4a4a !important;
+  text-shadow: none !important;
+}
+
+#osx-container .submit {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  gap: 40px !important; /* 40px between buttons */
+  margin-top: 16px;
+}
+#osx-container .submit button {
+  min-width: 120px;
+}
+#osx-modal-content h1,
+#osx-modal-content h2,
+#osx-modal-content .modal-title,
+#osx-modal-content .osx-modal-header,
+#osx-modal-content .title {
+  color: #151515;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  font-family: "Inter", Arial, sans-serif;
+}
+#osx-modal-content p,
+#osx-modal-content .modal-text,
+#osx-modal-content .osx-modal-text,
+#osx-modal-content .content,
+#osx-modal-content .text {
+  color: #4a4a4a;
+  font-weight: 400;
+  font-size: 12px;
+  margin: 0;
+  line-height: 1.4;
+  font-family: "Inter", Arial, sans-serif;
+}
+#osx-modal-content .osx-modal-footer,
+#osx-modal-content .modal-actions,
+#osx-modal-content .actions,
+#osx-modal-content .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  gap: 12px;
+}
+#osx-modal-content .modal-actions button,
+#osx-modal-content .modal-actions a,
+#osx-modal-content .osx-modal-footer button,
+#osx-modal-content .osx-modal-footer a {
+  min-width: 120px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-family: "Inter", Arial, sans-serif;
+}
+@media (max-width: 640px) {
+  #osx-container {
+    width: calc(100% - 40px);
+    height: auto;
+  }
+  #osx-modal-content .osx-modal-footer,
+  #osx-modal-content .modal-actions {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
 }
 
 .radiogroup {

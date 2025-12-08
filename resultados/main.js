@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
       prevLink.className = "prev";
       prevLink.title = "Anterior";
       prevLink.setAttribute("aria-label", "Anterior");
-      prevLink.innerHTML = '<img src="new_admin-select_dropdown.svg" class="paging-arrow" alt="Anterior"/>';
+      prevLink.innerHTML = '<img src="/assets/icons/new_admin-select_dropdown.svg" class="paging-arrow" alt="Anterior"/>';
       prevLink.addEventListener("click", (e) => {
         e.preventDefault();
         renderComments(currentPage - 1);
@@ -355,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nextLink.className = "next";
       nextLink.title = "Próxima";
       nextLink.setAttribute("aria-label", "Próxima");
-      nextLink.innerHTML = '<img src="new_admin-select_dropdown.svg" class="paging-arrow" alt="Próxima"/>';
+      nextLink.innerHTML = '<img src="/assets/icons/new_admin-select_dropdown.svg" class="paging-arrow" alt="Próxima"/>';
       nextLink.addEventListener("click", (e) => {
         e.preventDefault();
         renderComments(currentPage + 1);

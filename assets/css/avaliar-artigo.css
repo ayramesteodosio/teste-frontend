@@ -381,7 +381,7 @@ table th {
 .rating:hover .rating-star:hover,
 .rating:hover .rating-star:hover ~ .rating-star,
 .rating-input:checked ~ .rating-star {
-  background-image: url("/preview/assets/icons/star.svg");
+  background-image: url("/assets/icons/star.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -403,7 +403,7 @@ table th {
   display: block;
   width: 24px;
   height: 24px;
-  background-image: url("/preview/assets/icons/star-outline.svg");
+  background-image: url("/assets/icons/star-outline.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

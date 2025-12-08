@@ -607,8 +607,6 @@ label.crop-label input {
   background-color: #f9fafb;
   color: #414651 !important;
   padding: 10px 20px;
-  text-decoration: none;
-  font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -2690,17 +2688,52 @@ label.crop-label input {
 .forms .submit input[type="submit"],
 .pages .submit input[type="submit"],
 input[type="submit"] {
-  background: #3498db;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff2b34;
+  color: #fff !important;
+  padding: 12px 20px;
+  border-radius: 8px;
   border: none;
-  border-radius: 1px;
-  height: 30px;
-  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 27px;
-  padding: 0 8px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
   text-align: center;
+  text-decoration: none !important;
+}
+
+/* Ensure <button type="submit"> uses the same styles as input submit elements */
+.forms .submit button[type="submit"],
+.pages .submit button[type="submit"],
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff2b34;
+  color: #fff !important;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none !important;
+}
+
+/* Ensure buttons don't get forced to uppercase by other rules */
+button[type="submit"],
+.btn-submit {
+  text-transform: none !important;
 }
 
 #painel-evento-admin .box .title {
@@ -3229,7 +3262,7 @@ div.actions {
 }
 
 .buttons {
-  border-top: 2px solid #ccc;
+  border-top: 1px solid #ccc;
   margin-top: 20px;
 }
 
@@ -3638,13 +3671,13 @@ span.error-marginegative {
 }
 
 .action-icon.edit {
-  mask: url("/geral/assets/icons/Edit.svg") no-repeat center;
-  -webkit-mask: url("/geral/assets/icons/Edit.svg") no-repeat center;
+  mask: url("/assets/icons/Edit.svg") no-repeat center;
+  -webkit-mask: url("/assets/icons/Edit.svg") no-repeat center;
 }
 
 .action-icon.delete {
-  mask: url("/geral/assets/icons/Delete.svg") no-repeat center;
-  -webkit-mask: url("/geral/assets/icons/Delete.svg") no-repeat center;
+  mask: url("/assets/icons/Delete.svg") no-repeat center;
+  -webkit-mask: url("/assets/icons/Delete.svg") no-repeat center;
 }
 
 .table-resp td:before {
