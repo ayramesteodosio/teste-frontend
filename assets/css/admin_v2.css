@@ -642,7 +642,10 @@ label.crop-label input {
 
 @media (max-width: 767px) {
   .__btn-primary-red {
+    display: block;
+    width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -2012,7 +2015,9 @@ label.crop-label input {
 }
 
 .toast {
-  width: 480px;
+  min-width: 351px;
+  max-width: 480px;
+  width: auto;
   padding: 35px 20px;
   border-radius: 14px;
   background: #fff;
@@ -2061,6 +2066,26 @@ label.crop-label input {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 380px) {
+  .toast-container {
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .toast {
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    padding: 12px !important;
+    box-sizing: border-box !important;
   }
 }
 
@@ -3732,6 +3757,37 @@ span.error-marginegative {
     text-align: center;
     vertical-align: middle;
   }
+  .table-resp td:before {
+    display: none;
+  }
+}
+
+/* Keep table layout on small screens and allow horizontal scroll
+   so the table keeps its desktop width and the user can scroll. */
+@media (max-width: 479px) {
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table-resp {
+    /* let the table keep its intrinsic/full width */
+    display: table;
+    width: -moz-max-content;
+    width: max-content;
+    min-width: 640px; /* fallback to a sensible min width */
+    border: none !important;
+  }
+
+  .table-resp th,
+  .table-resp td {
+    display: table-cell;
+    padding: 10px !important;
+    border-bottom: 1px solid #ebebeb;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
   .table-resp td:before {
     display: none;
   }

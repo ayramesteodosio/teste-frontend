@@ -205,6 +205,23 @@
           showErrorAfter(periodContainer, "Não foi preenchido");
           errors.push("Não foi preenchido");
         }
+        if (inicioVal && fimVal) {
+          var parseDate = function (str) {
+            var parts = str.split("/");
+            if (parts.length !== 3) return null;
+            return new Date(parts[2], parts[1] - 1, parts[0]);
+          };
+          var dInicio = parseDate(inicioVal);
+          var dFim = parseDate(fimVal);
+          if (dInicio && dFim && dFim <= dInicio) {
+            var periodContainer =
+              (dataFim && dataFim.closest && dataFim.closest(".period")) ||
+              (dataInicio && dataInicio.closest && dataInicio.closest(".period")) ||
+              form;
+            showErrorAfter(periodContainer, "A data de término deve ser maior que a data de início.");
+            errors.push("Data de término inválida");
+          }
+        }
 
         var enviarChecked = document.querySelector('input[name="data[Pesquisa][enviar_para]"]:checked');
         if (!enviarChecked) {

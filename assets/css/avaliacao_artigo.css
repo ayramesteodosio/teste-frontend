@@ -88,12 +88,12 @@ label {
   display: block;
 }
 
-input[type=radio] {
+input[type="radio"] {
   margin-left: 0 !important;
 }
 
 .error textarea {
-  border: 1px solid #F84D4A;
+  border: 1px solid #f84d4a;
 }
 
 .error .error-message {
